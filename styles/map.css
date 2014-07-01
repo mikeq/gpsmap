@@ -1,0 +1,235 @@
+body {
+  background-color: #222;
+  padding-top: 70px;
+}
+
+h1, h2, label {
+  color: #777;
+}
+
+#data-prov {
+  position: relative;
+  width: 950px;
+  height: 600px;
+}
+
+.smallmap {
+    width: 100%;
+    height: 600px;
+    border: 1px solid #ccc;
+    z-index: 2;
+}
+
+div.olMapViewport {
+  z-index: 0;
+}
+
+#ele-graph {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 300px;
+  height:150px;
+  z-index: 50;
+  background-color: #222;
+}
+
+#gauges {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  height: 100px;
+  width: 384px;
+}
+
+#compass {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 5px solid #222;
+  background-image: url('../images/needle.png');
+  background-repeat: no-repeat;
+}
+
+#gaugeSpeed {
+  position: absolute;
+  bottom: 0px;
+  left: 84px;
+  width: 100px;
+  height: 100px;
+}
+
+#gaugeMiles {
+  position: absolute;
+  bottom: 0px;
+  left: 184px;
+  width: 100px;
+  height: 100px;
+}
+
+#gaugeTotalMiles {
+  position: absolute;
+  bottom: 0px;
+  left: 284px;
+  width: 100px;
+  height: 100px;
+}
+
+#weather {
+  position: absolute;
+  bottom: 10px;
+  right: 310px;
+  width: 256px;
+  height:64px;
+}
+
+#weather-background {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 192px;
+  height:64px;
+}
+
+#wind {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 64px;
+  height:64px;
+  background-image: url('../images/weather_flat/windarrow_small.png');
+  background-repeat: no-repeat;
+}
+
+#windspeed {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 64px;
+  height:64px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 64px;
+  color: #222;
+  font-weight: bold;
+}
+
+#condition {
+  position: absolute;
+  top: 0px;
+  left: 128px;
+  width: 64px;
+  height:64px;
+  background-image: url('../images/weather_flat/01d.png');
+  background-repeat: no-repeat;
+}
+
+#temp {
+  position: absolute;
+  top: 0px;
+  left: 64px;
+  width: 50px;
+  height:64px;
+  background-image: url('../images/weather_flat/degreec.png');
+  background-repeat: no-repeat;
+  text-align: left;
+  vertical-align: bottom;
+  font-size: 1.2em;
+  line-height: 64px;
+}
+
+#temptext {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 64px;
+  height:64px;
+  margin-left: 10px;
+  margin-top: 3px;
+  text-align: right;
+  vertical-align: middle;
+  color: #222;
+  font-size: 2.5em;
+  font-weight: bold;
+  line-height: 64px;
+}
+
+.olControlLayerSwitcher .layersDiv {
+  background-color: #222 !important;
+  opacity: 0.8;
+}
+
+.olControlLayerSwitcher .maximizeDiv img {
+  content:url('../images/map/layer-switcher-maximize.png');
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-top: 0px;
+  }
+
+  #data-prov {
+    position: relative;
+    width: 100%;
+    height: 700px;
+    border: 1px solid orange;
+  }
+
+  #weather {
+    display: none;
+  }
+
+  .smallmap {
+    height: 300px;
+  }
+
+  #ele-graph {
+    width: 100%;
+    left: 10px;
+    top: 310px;
+    border: none;
+  }
+
+  #gauges {
+    height: 200px;
+    width: 100%;
+    top: 470px;
+    border: 3px solid #70aad6;
+  }
+
+  #gauge-background {
+    position: absolute;
+    background-color: #70aad6;
+    opacity: 0.4;
+    width: 100%;
+    height: 100%;    
+  }
+
+  #gaugecontainer {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  #compass {
+    top: 20px;
+    left: 20px;
+  }
+
+  #gaugeSpeed {
+    top: 0px;
+    left: 100px;
+  }
+
+  #gaugeMiles {
+    left: 0px;
+  }
+
+  #gaugeTotalMiles {
+    left: 100px;
+  }
+}

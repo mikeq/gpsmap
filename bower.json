@@ -1,0 +1,26 @@
+{
+  "name": "gpsmap",
+  "version": "0.0.1",
+  "authors": [
+    "Mike Quinn <mike@velochallenge.org>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "openlayers": "2.13.1",
+    "flot": "~0.8.3",
+    "raphael": "~2.1.2",
+    "respond": "~1.4.2",
+    "bootstrap": "~3.2.0",
+    "justgage": "*"
+  }
+}

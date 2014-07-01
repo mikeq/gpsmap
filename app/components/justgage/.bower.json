@@ -1,0 +1,19 @@
+{
+  "name": "justgage",
+  "main": "justgage.js",
+  "ignore": [
+    "R&D",
+    "README.md"
+  ],
+  "homepage": "https://github.com/Ulflander/justgage",
+  "_release": "13f8372c4b",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "13f8372c4bab2ed576e42199b45ee95dfd14fcf7"
+  },
+  "_source": "git://github.com/Ulflander/justgage.git",
+  "_target": "*",
+  "_originalSource": "justgage",
+  "_direct": true
+}
