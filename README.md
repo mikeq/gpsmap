@@ -3,6 +3,8 @@ gpsmap
 
 Browser mapping solution for Open GPS Tracker Android application (https://code.google.com/p/open-gpstracker/)
 
+![Alt text](images/screenshot/map.png?raw=true "Live Tracking")
+
 Prerequisites
 -------------
 
