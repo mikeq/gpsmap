@@ -56,11 +56,11 @@ $(document).ready(function() {
 function initialiseIcons() {
     var size = new OpenLayers.Size(32,37);
     var offset = new OpenLayers.Pixel(-(size.w/2), 0);
-    gpsMap.teamIcon = new OpenLayers.Icon('../images/pointupbike.png', size, offset);
+    gpsMap.teamIcon = new OpenLayers.Icon('images/pointupbike.png', size, offset);
 
     offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-    startIcon = new OpenLayers.Icon('../images/start.png', size, offset);
-    gpsMap.finishIcon = new OpenLayers.Icon('../images/finish.png', size, offset);
+    startIcon = new OpenLayers.Icon('images/start.png', size, offset);
+    gpsMap.finishIcon = new OpenLayers.Icon('images/finish.png', size, offset);
 }
 
 /**
