@@ -39,11 +39,12 @@ The following are used in the project (view bower.json for dependencies)
 
 ### Database
 
-The database install script can be found under `scripts\install`
+The database install script can be found under `scripts/install/`
 Change the username and password to something more appropriate then run the script on your database
 
 ### Settings
-The following in the Settings class (`scripts\lib\util\settings.class.php`) should be changed
+The following in the Settings class (`scripts/lib/util/settings.class.php`) should be changed
+
     const TRACKING_DSN = 'localhost|username|password|velo'; //username/password should be set to the user/pass you defined when setting up the database in the db.sql script
     const START_DATE = '2014-07-01'; // Date of the first day to start tracking from
     const DEVICEID = 'TOPSECRETINFO'; // Change to something appropriate. This will be passed into the server script from the phone application
@@ -54,7 +55,7 @@ This has been developed to support the live tracking of a charity event I am tak
 This event takes place over 17 days and sees us cycling from Edinburgh to Monte Carlo for Prostate Cancer UK.
 
 We will run the open source Android application Open GPS Tracker (https://code.google.com/p/open-gpstracker/), this application
-will send gps data to the script `scripts\store_loc.php` at regular intervals, this data is stored in the database (`gpsdata`) and then
+will send gps data to the script `scripts/store_loc.php` at regular intervals, this data is stored in the database (`gpsdata`) and then
 displayed on a map in the browser as and when user visit the map site.
 
 In addition to this the mapping site will also display that days route and elevation profile, the routes are read in from GPX Track files stored under `data/`.  These files
@@ -91,4 +92,5 @@ there is additional information that can be passed but I wanted to minimise netw
 
 I calculate the bearing and speed in the code so I had no need for these.
 
-
+If you find this code useful please consider donating to our charity event
+visit http://monte.bike
