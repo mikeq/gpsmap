@@ -56,13 +56,14 @@ This event takes place over 17 days and sees us cycling from Edinburgh to Monte 
 
 We will run the open source Android application Open GPS Tracker (https://code.google.com/p/open-gpstracker/), this application
 will send gps data to the script `scripts/store_loc.php` at regular intervals, this data is stored in the database (`gpsdata`) and then
-displayed on a map in the browser as and when user visit the map site.
+displayed on a map in the browser as and when users visit the map site.
 
 In addition to this the mapping site will also display that days route and elevation profile, the routes are read in from GPX Track files stored under `data/`.  These files
-must be GPX Track and not GPX Route format.  The filename of each daily track should be of the format day*X*.gpx, so 1st day is day1.gpx, 2nd day is day2.gpx etc
+must be GPX Track and not GPX Route format.  The filename of each daily track should be of the format day*X*.gpx, so 1st day is *day1.gpx*, 2nd day is *day2.gpx* etc
 
-The code works out which day it is based on Settings::START_DATE, so make sure this is set to the date that corresponds to day 1.  2 example GPX files
-are under `data/`
+The code works out which day it is based on `Settings::START_DATE`, so make sure this is set to the date that corresponds to day 1.  
+
+2 sample GPX files are under `data/`
 
 An additional table `gpsdaypoints` holds the latitude and longitude of each days start and end points and route title, 2 sample records are entered during
 the running of the database script.  The `dayid` in this table corresponds to day **1** day **2** etc
@@ -75,7 +76,7 @@ The current weather conditions will also be displayed, this utilises the http://
 There is a streaming option (more|settings|sharing settings), check the "Stream to custom web server" option, enter the following
 for the "Custom web server URL"
 
-http://*yourserver*/scripts/store_loc.php?d=*DEVICEID*&lat=@LAT@&lon=@LON@&id=@ID@&alt=@ALT@&t=@TIME@
+    http://*yourserver*/scripts/store_loc.php?d=*DEVICEID*&lat=@LAT@&lon=@LON@&id=@ID@&alt=@ALT@&t=@TIME@
 
 This sends 
 - device ID (replace *DEVICEID* with whatever you setup in the Settings class)
