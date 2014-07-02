@@ -9,13 +9,12 @@ Prerequisites
 Developed on the following
 - PHP 5.5.3
 - MySQL 5.5.34
-- webserver (tested on Apache 2)
+- Apache 2
 
 for installation the following are preferred
-- git
-- node
-- npm
-- bower
+- git (http://git-scm.com/)
+- node/npm (http://nodejs.org/)
+- bower (http://bower.io/)
 
 
 Installation
