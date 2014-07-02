@@ -1,7 +1,7 @@
 gpsmap
 ======
 
-Browser mapping solution for Open GPS Tracker
+Browser mapping solution for Open GPS Tracker Android application (https://code.google.com/p/open-gpstracker/)
 
 Prerequisites
 -------------
