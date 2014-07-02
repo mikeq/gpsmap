@@ -211,7 +211,7 @@ function setupRouteInformation() {
             addPoint(gpsMap.endPoint, gpsMap.routeLayer, gpsMap.finishIcon);
             addPoint(gpsMap.curPoint, gpsMap.markerLayer, gpsMap.teamIcon);
             gpsMap.map.setCenter(gpsMap.startPoint);
-            $('#route-title').text(data.title + " (Day " + (parseInt(data.dayid, 10) + 1) + ")");
+            $('#route-title').text(data.title + " (Day " + (parseInt(data.dayid, 10)) + ")");
             loadElevation(data.dayid);
             getWeather({lat: data.start_lat, lon: data.start_lng});
             getTotalMiles();
