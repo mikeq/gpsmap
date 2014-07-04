@@ -48,7 +48,7 @@ class Settings
     const KM_TO_MILES = 0.621371192;
     const METRE_TO_FEET = 3.2808399;
 
-    const START_DATE = '2014-07-01';
+    const START_DATE = '2014-07-04';
     const TIMEZONE = 'Europe/London';
     const DEVICEID = 'TOPSECRETINFO'; //
 
@@ -56,4 +56,9 @@ class Settings
      * Weather API
      */
     const CURRENT_WEATHER_URL = 'http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f&units=imperial';
+
+    /**
+     * Test tracking
+     */
+    const TESTTRACKING_URL = 'http://gps.local/scripts/store_loc.php?d=%s&lat=%s&lon=%s&id=%s&alt=%s&t=%s';
 }

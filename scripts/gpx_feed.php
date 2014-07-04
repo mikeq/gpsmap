@@ -45,7 +45,7 @@ $timestamp = $now->format('U');
 $sleep = empty($argv[3]) ? 0 : $argv[3];
 
 $points = array();
-$pointTemplate = '{"LAT":"%s","LON":"%s","DEVICE":"MQ71758835","TRACKID":"5","ALTITUDE":"%s","TIME":"%s"}';
+$pointTemplate = '{"LAT":"%s","LON":"%s","DEVICE":"%s","TRACKID":"5","ALTITUDE":"%s","TIME":"%s"}';
 
 $location = new Location();
 $xml = simplexml_load_file('../data/day' . $dayId . '.gpx');
@@ -55,10 +55,10 @@ foreach ($xml->trk->trkseg->trkpt as $value) {
     $att = $value->attributes();
     $i++;
     $dataTime = ($timestamp + $i) . '000';
-    $points[] = sprintf($pointTemplate, $att->lat, $att->lon, $value->ele, $dataTime);
+    $points[] = sprintf($pointTemplate, $att->lat, $att->lon, Settings::DEVICEID, $value->ele, $dataTime);
 }
 
-$url = 'http://monte.local/scripts/store_loc.php?d=%s&lat=%s&lon=%s&id=%s&alt=%s&t=%s';
+$url = Settings::TESTTRACKING_URL;
 $adb = curl_init();
 
 foreach ($points as $point) {
