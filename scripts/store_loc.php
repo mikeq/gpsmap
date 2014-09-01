@@ -38,7 +38,7 @@
  * @BEAR@
  * @TIME@ passing in as "t"
  */
-require_once 'lib/location.class.php';
+require_once 'lib/gpswriter.class.php';
 
 try {
     // as a simple layer of security pass the string set in lib/util/settings.class.php (Settings::DEVICEID) from your device
@@ -46,12 +46,12 @@ try {
         return false;
     }
 
-    $loc = new Location();
+    $writer = new OpenGPSTrackerWriter();
     /**
      * Not passing all values possible from Open GPS Tracker application, you will need to amend the
      * Location::storePoint method if you want to store other parameters and possibly the gpsdata table
      */
-    $loc->storePoint($_GET['d'], $_GET['id'], $_GET['t'], $_GET['lat'], $_GET['lon'], $_GET['alt']);
+    $writer->storePoint($_GET['d'], $_GET['id'], $_GET['t'], $_GET['lat'], $_GET['lon'], $_GET['alt']);
 } catch (Exception $e) {
     error_log($e->getMessage());
 }
