@@ -25,8 +25,8 @@
  * @copyright  2014 Mike Quinn
  * @license    http://www.gnu.org/licenses/ GNU General Public License
  */
-require_once 'lib/location.class.php';
-$location = new Location();
+require_once 'lib/util/utilities.class.php';
+
 $xml = simplexml_load_file('../data/day' . $_GET['dayid'] . '.gpx');
 $preLat = 0;
 $preLon = 0;
@@ -37,7 +37,7 @@ foreach ($xml->trk->trkseg->trkpt as $value) {
     $att = $value->attributes();
 
     if ($preLat !== 0 && $preLon !== 0) {
-        $distance = $location->haversine($preLat, $preLon, floatval($att->lat), floatval($att->lon));
+        $distance = Utilities::haversine($preLat, $preLon, floatval($att->lat), floatval($att->lon));
         $totDistance += ($distance * Settings::KM_TO_MILES);
     }
 
