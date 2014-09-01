@@ -48,7 +48,7 @@ class Settings
     const KM_TO_MILES = 0.621371192;
     const METRE_TO_FEET = 3.2808399;
 
-    const START_DATE = '2014-07-04';
+    const START_DATE = '2014-07-21';
     const TIMEZONE = 'Europe/London';
     const DEVICEID = 'TOPSECRETINFO'; //
 
@@ -61,4 +61,6 @@ class Settings
      * Test tracking
      */
     const TESTTRACKING_URL = 'http://gps.local/scripts/store_loc.php?d=%s&lat=%s&lon=%s&id=%s&alt=%s&t=%s';
+    const GPSTRACKER_URL = 'http://gps.local/scripts/updatelocation.php';
+    const GPSTRACKER_POST = 'phonenumber=%s&latitude=%s&longitude=%s&sessionid=%s&extrainfo=%s&date=%s';
 }
