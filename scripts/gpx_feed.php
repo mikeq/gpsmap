@@ -25,7 +25,8 @@
  * @copyright  2014 Mike Quinn
  * @license    http://www.gnu.org/licenses/ GNU General Public License
  */
-require_once 'lib/location.class.php';
+
+require_once 'lib/util/settings.class.php';
 
 if ($argc < 2) {
     print "php gps_feed.php dayId [date] [sleep]" . PHP_EOL;
@@ -47,7 +48,6 @@ $sleep = empty($argv[3]) ? 0 : $argv[3];
 $points = array();
 $pointTemplate = '{"LAT":"%s","LON":"%s","DEVICE":"%s","TRACKID":"5","ALTITUDE":"%s","TIME":"%s"}';
 
-$location = new Location();
 $xml = simplexml_load_file('../data/day' . $dayId . '.gpx');
 $i = 0;
 
