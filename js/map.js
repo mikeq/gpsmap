@@ -328,7 +328,7 @@ function loadGPX(dayId) {
 
     // create the route layer
     var gpx = new OpenLayers.Layer.Vector(
-        "Day " + (parseInt(dayId, 10) + 1) + " Route",
+        "Day " + parseInt(dayId, 10) + " Route",
         {
             styleMap: new OpenLayers.StyleMap(new OpenLayers.Style(style)),
             strategies: [new OpenLayers.Strategy.Fixed()],
