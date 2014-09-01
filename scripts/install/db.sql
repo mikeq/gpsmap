@@ -7,17 +7,18 @@ DROP TABLE IF EXISTS gpsdata;
 
 CREATE TABLE gpsdata (
   `devicekey` varchar(30) NOT NULL COMMENT 'Key of device',
-  `datatime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'timestamp when datapoint was logged',
+  `datatime` timestamp NOT NULL COMMENT 'timestamp when datapoint was logged',
   `coord` point NOT NULL COMMENT 'latitude and longitude of logged datapoint',
   `altitude` float(5,1) NOT NULL COMMENT 'altitude in meters',
   `speed` float(6,2) NOT NULL COMMENT 'speed in miles per hour',
   `heading` smallint(6) NOT NULL COMMENT 'direction travelling in degrees',
   `distance` float(6,3) DEFAULT NULL COMMENT 'miles',
-  `tracktag` varchar(10) NOT NULL,
+  `tracktag` varchar(50) NOT NULL,
   PRIMARY KEY (`devicekey`,`datatime`),
   SPATIAL KEY `idx_coord` (`coord`),
   KEY `idx_devicekey` (`devicekey`),
-  KEY `idx_track_time` (`tracktag`,`datatime`)
+  KEY `idx_track_time` (`tracktag`,`datatime`),
+  KEY `idx_device_time` (`devicekey`, 'datatime')
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS daypoints;
