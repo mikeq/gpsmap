@@ -25,8 +25,7 @@
  * @copyright  2014 Mike Quinn
  * @license    http://www.gnu.org/licenses/ GNU General Public License
  */
-require_once 'lib/location.class.php';
-error_log(print_r($_POST, true));
+
 /**
  * Values sent by https://www.websmithing.com/gps-tracker/
  * sent as POST variables by the application
