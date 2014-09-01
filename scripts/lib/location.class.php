@@ -54,106 +54,6 @@ class Location
     }
 
     /**
-     * Store the GPS point in the database
-     *
-     * @param string  $deviceid  Pass in an ID that matches the deviceid in the Settings class
-     * @param integer $trackId   A unique id identifying the point belongs to a certain track
-     * @param integer $timestamp Timestamp of the GPS point in milliseconds
-     * @param float   $latitude  GPS Point latitude (points to the South should be negative)
-     * @param float   $longitude GPS Point longitude (points to the West should be negative)
-     * @param integer $altitude  Altitude of the GPS point in meters
-     *
-     * @access public
-     * @return boolean false if device ID does not match Settings
-     */
-    public function storePoint($device, $trackId, $timestamp, $latitude, $longitude, $altitude)
-    {
-        if ($device !== Settings::DEVICEID) {
-            return false;
-        }
-
-        $theDate = new DateTime(null, new DateTimeZone(Settings::TIMEZONE));
-        $theDate->setTimestamp($timestamp/1000);
-
-        try {
-            $lastPoint = $this->_getLastStoredPoint($theDate);
-
-            if ($lastPoint !== false) {
-                $newDistance = $this->haversine($lastPoint['lat'], $lastPoint['lng'], $latitude, $longitude);
-                $distance = $lastPoint['distance'] + ($newDistance * Settings::KM_TO_MILES);
-
-                $previousDataTime = new DateTime($lastPoint['datatime'], new DateTimeZone(Settings::TIMEZONE));
-                $interval = $theDate->diff($previousDataTime);
-                $secondsPassed = $interval->format('%s');
-
-                $speedMPS = ($newDistance * 1000) / $secondsPassed;
-                $speed = $speedMPS * Settings::MPS_TO_MPH;
-                $heading = $this->getRhumbLineBearing($lastPoint['lat'], $lastPoint['lng'], $latitude, $longitude);
-            } else {
-                $speed = 0;
-                $heading = 0;
-                $distance = 0;
-            }
-
-            $insert = "REPLACE INTO gpsdata (devicekey, tracktag, coord, altitude, datatime, speed, heading, distance)
-                VALUES
-                (:device, :trackid, GeomFromText('POINT($latitude $longitude)'), :altitude, :datatime, :speed, :heading, :distance)";
-
-            $stmt = $this->_dbConn->prepare($insert);
-
-            $stmt->execute(
-                array(
-                    ':device' => $device,
-                    ':trackid' => $trackId,
-                    ':altitude' => $altitude,
-                    ':datatime' => $theDate->format('Y-m-d H:i:s'),
-                    ':speed' => $speed,
-                    ':heading' => $heading,
-                    ':distance' => $distance
-                )
-            );
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-        }
-    }
-
-    /**
-     * Get the last (based on date) point stored in the database
-     *
-     * @param DateTime $dataTime Date on which to get last point
-     *
-     * @access private
-     * @return array Array with the point information
-     */
-    private function _getLastStoredPoint($dataTime)
-    {
-        try {
-            $query = "SELECT
-                datatime,
-                X(coord) AS lat,
-                Y(coord) AS lng,
-                distance
-            FROM gpsdata
-            WHERE date_format(datatime, '%Y-%m-%d') = :datatime
-            ORDER BY datatime DESC
-            LIMIT 1";
-
-            $stmt = $this->_dbConn->prepare($query);
-
-            $stmt->execute(
-                array(
-                    ':datatime' => $dataTime->format('Y-m-d')
-                )
-            );
-
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $result;
-        } catch (PDOException $e) {
-            error_log($e->getMessage());
-        }
-    }
-
-    /**
      * Get the last point stored in the database
      *
      * @param DateTime $lastTime Date/Time
@@ -220,79 +120,6 @@ class Location
     }
 
     /**
-     * Implementation of the Haversine distance calculation
-     *
-     * @param float $lat1  Starting Latitude
-     * @param float $long1 Starting Longitude
-     * @param float $lat2  End Latitude
-     * @param float $long2 End Longitude
-     *
-     * @access public
-     * @return float Distance in km
-     */
-    public function haversine($lat1, $long1, $lat2, $long2)
-    {
-        $lat1Rad  = deg2rad($lat1);
-        $lat2Rad  = deg2rad($lat2);
-        $long1Rad = deg2rad($long1);
-        $long2Rad = deg2rad($long2);
-        $dLat     = deg2rad(($lat2 - $lat1));
-        $dLon     = deg2rad(($long2 - $long1));
-        $a        = (sin($dLat/2) * sin($dLat/2)) + cos($lat1Rad) * cos($lat2Rad) * (sin($dLon/2) * sin($dLon/2));
-        $c        = 2 * atan2(sqrt($a), sqrt(1-$a));
-
-        return Settings::EARTH_RADIUS * $c;
-    }
-
-    /**
-     * Get the compass bearing
-     *
-     * @param float $lat1  Starting Latitude
-     * @param float $long1 Starting Longitude
-     * @param float $lat2  End Latitude
-     * @param float $long2 End Longitude
-     *
-     * @access public
-     * @return integer Angle of the bearing
-     */
-    public function getRhumbLineBearing($lat1, $long1, $lat2, $long2)
-    {
-        // difference in longitudinal coordinates
-        $dLon = deg2rad($long2) - deg2rad($long1);
-
-        // difference in the phi of latitudinal coordinates
-        $dPhi = log(tan(deg2rad($lat2) / 2 + pi() / 4) / tan(deg2rad($lat1) / 2 + pi() / 4));
-
-        // we need to recalculate $dLon if it is greater than pi
-        if (abs($dLon) > pi()) {
-            if ($dLon > 0) {
-              $dLon = (2 * pi() - $dLon) * -1;
-            }
-            else {
-              $dLon = 2 * pi() + $dLon;
-            }
-        }
-
-        // return the angle, normalized
-        return (rad2deg(atan2($dLon, $dPhi)) + 360) % 360;
-    }
-
-    /**
-     * Get the compass direction
-     *
-     * @param integer $bearing Bearing
-     *
-     * @access public
-     * @return integer Angle of heading
-     */
-    public function getCompassDirection($bearing)
-    {
-        static $cardinals = array( 'N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW', 'N' );
-        return $cardinals[round( $bearing / 45 )];
-    }
-
-
-    /**
      * Get total miles done so far (sum of all distances in the gpsdata table)
      *
      * @access public
@@ -316,7 +143,5 @@ class Location
         } catch (Exception $e) {
             error_log($e->getMessage());
         }
-
     }
-
 }
