@@ -16,7 +16,7 @@
   ],
   "dependencies": {
     "jquery": "~2.1.1",
-    "openlayers": "2.13.1",
+    "openlayers": "http://github.com/openlayers/ol2/releases/download/release-2.13.1/OpenLayers-2.13.1.tar.gz",
     "flot": "~0.8.3",
     "raphael": "~2.1.2",
     "respond": "~1.4.2",
