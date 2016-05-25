@@ -18,7 +18,7 @@ CREATE TABLE gpsdata (
   SPATIAL KEY `idx_coord` (`coord`),
   KEY `idx_devicekey` (`devicekey`),
   KEY `idx_track_time` (`tracktag`,`datatime`),
-  KEY `idx_device_time` (`devicekey`, 'datatime')
+  KEY `idx_device_time` (`devicekey`, `datatime`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS daypoints;
